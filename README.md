@@ -22,9 +22,9 @@ sent to a two-stage purification.
 
 ```mermaid
 flowchart TD
-    A[Gold ore mixture] --> |input| B(Flotation)
+    A[Gold ore mixture] --> |input| B[/Flotation\]
     B --> |process| C(Rougher concentrate)
-    B --> |tails| D[Rougher tails]
+    B --> |tails| D@{ shape: procs, label: "Rougher tails" }
     C --> E(First stage of cleaner process)
     E --> |tails| D
     E --> F(Second stage of cleaner process)
@@ -84,9 +84,9 @@ names present in the dataset.
 
 ```mermaid
 flowchart TD
-    A[Gold ore mixture] --> |1| B(Flotation)
+    A[Gold ore mixture] --> |1| B[/Flotation\]
     B --> |3| C(Rougher concentrate)
-    B --> |2| D[Rougher tails]
+    B --> |2| D@{ shape: procs, label: "Rougher tails" }
     C --> E(First stage of cleaner process)
     E --> |4| D
     E --> |5| F(Second stage of cleaner process)
