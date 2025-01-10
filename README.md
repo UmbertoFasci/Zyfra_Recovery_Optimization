@@ -72,3 +72,39 @@ graph LR
         FR[Feed rate]
     end
 ```
+## Data Description
+
+Given the technological process which the features originate frome they are named in the following format:
+
+```
+[stage].[parameter_type].[parameter_name]
+```
+With this in mind we can take another look at the technological process where we can then infer the feature
+names present in the dataset.
+
+```mermaid
+flowchart TD
+    A[Gold ore mixture] --> |1| B(Flotation)
+    B --> |3| C(Rougher concentrate)
+    B --> |2| D[Rougher tails]
+    C --> E(First stage of cleaner process)
+    E --> |4| D
+    E --> |5| F(Second stage of cleaner process)
+    F --> |6| D
+    F --> |7| G[Final concentrate]
+```
+
+<div align="center">
+    
+| # | Feature Name |
+|--------|------------|
+| 1 | rougher.input.feed_au |
+| 2 | rougher.output.tail_au |
+| 3 | rougher.output.concentrate_au |
+| 4 | primary_cleaner.output.tail_au |
+| 5 | primary_cleaner.output.concentrate_au |
+| 6 | secondary_cleaner.output.tail_au |
+| 7 | final.tail_au |
+
+</div>
+
