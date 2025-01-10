@@ -108,3 +108,81 @@ flowchart TD
 
 </div>
 
+## Recovery Calculation Function
+
+In the procedure, the recovery calculation of the provided dataset is tested against one developed by myself. This is done after importing
+and ingesting the data which came in three separate files: `gold_recovery_train.csv`, `gold_recovery_test.csv`, and `gold_recovery_full.csv`.
+
+>[!NOTE]
+> The downloaded data is straight from the source, and some parameters are not available becasue they were measured or calculated
+> after the data was collected. That's why some features that are present in the training set may be absent from the test set. 
+
+Now, continuing with the task at hand. The first objective with this dataset was to make sure that the recovery was calculated appropriately.
+To do this, the following equation was used:
+
+```math
+Recovery = \frac{C \times (F - T)}{F \times (C - T)} \cdot 100\%
+```
+
+Where,
+
+
+- $C$ — share of gold in the concentrate right after flotation (for finding the rougher concentrate recovery)/after purification (for finding the final concentrate recovery)
+- $F$ — share of gold in the feed before flotation (for finding the rougher concentrate recovery)/in the concentrate right after flotation (for finding the final concentrate recovery)
+- $T$ — share of gold in the rougher tails right after flotation (for finding the rougher concentrate recovery)/after purification (for finding the final concentrate recovery)
+
+Calculating the recovery in python can be achieved with:
+```python
+def calculate_recovery(row, concentration_col, feed_col, tails_col):
+    C = row[concentration_col]
+    F = row[feed_col]
+    T = row[tails_col]
+    
+    # Avoid division by zero
+    if F == 0 or (C - T) == 0:
+        return 0
+    
+    recovery = C * (F - T) / (F * (C - T)) * 100
+    
+    # Handle edge cases
+    if np.isnan(recovery) or np.isinf(recovery):
+        return 0
+    
+    return recovery
+```
+
+Applying this function to the training set:
+```python
+train_df['calculated_recovery'] = train_df.apply(
+    lambda row: calculate_recovery(
+        row,
+        'rougher.output.concentrate_au',  # C
+        'rougher.input.feed_au',          # F
+        'rougher.output.tail_au'          # T
+    ),
+    axis=1
+)
+
+```
+Validating the recovery calculation:
+```python
+valid_recovery_mask = (~train_df['rougher.output.recovery'].isna()) & (~train_df['calculated_recovery'].isna())
+
+mae = mean_absolute_error(
+    train_df.loc[valid_recovery_mask, 'rougher.output.recovery'],
+    train_df.loc[valid_recovery_mask, 'calculated_recovery']
+
+)
+```
+>[!NOTE]
+> The `valid_recovery_mask` is created as a way to only include values that are not missing and to avoid any errors.
+> Keep in mind this is being done before any initial data processing. 
+
+### Recovery Calculation Results
+
+The Mean Absolute Error between the calculated and the actual recovery values was found to be **`9.30e-15`**.
+Considering this extremely low MAE value, effectively zero, we confirmed that the implementation of the recovery formula
+matches the existing calculations in the dataset.
+
+This near-zero difference validates both our understanding of the recovery calculation process and the reliability of
+the provided data, ensuring a solid foundation for subsequent modeling efforts.
