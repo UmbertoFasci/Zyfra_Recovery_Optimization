@@ -39,7 +39,7 @@ flowchart TD
 ### Purification
 - The rougher concentrate undergoes two stages of purification. After purification, the final concentrate and new tails is obtained.
 
-## Staging & Process Components
+### Staging & Process Components
 
 Below are the staging and processing components associated with the technological process, these compnents are utilized as features in the final dataset.
 
