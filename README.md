@@ -38,3 +38,37 @@ flowchart TD
 
 ### Purification
 - The rougher concentrate undergoes two stages of purification. After purification, the final concentrate and new tails is obtained.
+
+## Staging & Process Components
+
+Below are the staging and processing components associated with the technological process, these compnents are utilized as features in the final dataset.
+
+```mermaid
+graph LR
+    subgraph Process Components
+        direction TB
+        RF[Rougher feed]
+        
+        subgraph Reagents[Rougher/Reagent additions]
+            direction LR
+            X[Xanthate<br/>Promoter/activator]
+            S[Sulphate<br/>Sodium sulphide]
+            D[Depressant<br/>Sodium silicate]
+        end
+        
+        RP[Rougher process<br/>Flotation]
+        RT[Rougher tails<br/>Product residues]
+        FB[Float banks<br/>Flotation unit]
+        CP[Cleaner process<br/>Purification]
+        RAu[Rougher Au<br/>Rougher gold concentrate]
+        FAu[Final Au<br/>Final gold concentrate]
+    end
+    
+    subgraph Stage Parameters
+        direction TB
+        AA[Volume of air]
+        FL[Fluid levels]
+        FS[Feed particle size]
+        FR[Feed rate]
+    end
+```
