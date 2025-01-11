@@ -323,4 +323,16 @@ However, for the `final.output.recovery`:
 >[!NOTE]
 >_The inclusion or exclusion of the backward fill method did not affect the model performance in any way._
 
+## Analysis
 
+The analysis of the given dataset will focus on three factors: metal concentration change through the main stages of the technological processes, particle size distribution comparisons between provided training and
+testing datasets. and concentration distributions by stage.
+
+### Metal Concentration
+
+<img src="https://umbertofasci.github.io/Projects/OptimizingGoldRecovery_files/figure-html/cell-30-output-1.png" align="right"
+    alt="Zyfra logo" width="440" height="750">
+
+The concentration changes of gold (AU), silver (AG), and lead (PB) are illustrated here throughout different stages of the earlier described technological process.
+Gold demonstrates the most significant enrichment, starting at **7.1** in the raw feed, increasing by **142.7%** to **17.4** in the rougher concentrate, and finally
+reaching **39.4** in the final concentrate, marking a total increase of **127%**.
