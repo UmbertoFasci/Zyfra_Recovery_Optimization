@@ -334,5 +334,14 @@ testing datasets. and concentration distributions by stage.
     alt="Zyfra logo" width="440" height="750">
 
 The concentration changes of gold (AU), silver (AG), and lead (PB) are illustrated here throughout different stages of the earlier described technological process.
-Gold demonstrates the most significant enrichment, starting at **7.1** in the raw feed, increasing by **142.7%** to **17.4** in the rougher concentrate, and finally
-reaching **39.4** in the final concentrate, marking a total increase of **127%**.
+Gold demonstrates the most significant enrichment, starting at 7.1 in the raw feed, increasing by 142.7% to 17.4 in the rougher concentrate, and finally
+reaching 39.4 in the final concentrate, marking a total increase of 127%.
+
+Silver shows a different pattern, initially increasing by 35.1% from 7.8 to 10.5 in the rougher concentrate, but then decreasing significantly by 55.4% to 4.7 in the
+final concentrate.
+
+Lead follows a steady upward trend, starting at 3.2 in the raw feed, increasing by 114.3% to 6.9 in the rougher concentrate, and finally reaching 9.1 in the final
+concentrate, showing a 32.5% increase in the final stage.
+
+These patterns reveal that the purification process is most effective for gold concentration while having varying effects on silver and lead, with silver notably being
+reduced in the final stage.
