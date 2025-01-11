@@ -191,7 +191,7 @@ the provided data, ensuring a solid foundation for subsequent modeling efforts.
 
 ### Missing Test Features
 
-To better describe what features are missing in the provided test set here is a complete list of missing 35 features.
+To better describe what features are missing in the provided test set here is a complete list of the missing 35 features.
 
 <details>
 <summary>Click to view all missing features</summary>
@@ -253,4 +253,35 @@ measurements also show varying degrees of missingness across different parameter
 
 ### Missing Data Imputation
 
-In this section an experiment in filling time-series-like data is performed targeting several methodologies and data leakage. While dropping the values was 
+#### Rolling Average Interpolation
+
+In this section an experiment in filling time-series-like data is performed targeting several methodologies and data leakage. While dropping the values was
+an option, at this point I wanted to try and maintain the temporal effects of the dataset. The first approach that was made was to conduct a **rolling average interpolation**.
+This interpolation formula creates a bidirectional moving average by computing both forward and backward rolling means with a specified window size, then averages these two
+directions to produce more balanced estimates.
+
+```math
+Combined  Average(t) = \frac{1}{2} (\frac{\sum_{i=t}^{t+w} X_{i}}{w} + \frac{\sum_{i=t-w}^{t} X_{i}}{w})
+```
+where,
+
+- $w$ — window size
+- $t$ — current time point
+- $X_{i}$ — value at time i
+
+This is performed in python:
+
+```python
+def rolling_average_interpolate(series, window):
+    # Create forward and backward rolling means
+    forward_roll = series.rolling(window=window, min_periods=1).mean()
+    backward_roll = series[::-1].rolling(window=window, min_periods=1).mean()[::-1]
+    
+    # Combine forward and backward rolls
+    combined_roll = (forward_roll + backward_roll) / 2
+    
+    # Only fill the NaN values in the original series
+    result = series.copy()
+    result[series.isna()] = combined_roll[series.isna()]
+    return result
+```
