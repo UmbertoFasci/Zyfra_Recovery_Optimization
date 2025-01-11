@@ -186,3 +186,71 @@ matches the existing calculations in the dataset.
 
 This near-zero difference validates both our understanding of the recovery calculation process and the reliability of
 the provided data, ensuring a solid foundation for subsequent modeling efforts.
+
+## Raw Data Dilemmas
+
+### Missing Test Features
+
+To better describe what features are missing in the provided test set here is a complete list of missing 35 features.
+
+<details>
+<summary>Click to view all missing features</summary>
+    
+- final.output.concentrate_ag (Type: float64)
+- primary_cleaner.output.tail_pb (Type: float64)
+- rougher.calculation.floatbank11_sulfate_to_au_feed (Type: float64)
+- rougher.calculation.floatbank10_sulfate_to_au_feed (Type: float64)
+- rougher.output.tail_sol (Type: float64)
+- rougher.output.concentrate_sol (Type: float64)
+- final.output.tail_ag (Type: float64)
+- primary_cleaner.output.concentrate_ag (Type: float64)
+- rougher.calculation.sulfate_to_au_concentrate (Type: float64)
+- rougher.output.tail_pb (Type: float64)
+- primary_cleaner.output.tail_ag (Type: float64)
+- calculated_recovery (Type: float64)
+- rougher.calculation.au_pb_ratio (Type: float64)
+- secondary_cleaner.output.tail_sol (Type: float64)
+- secondary_cleaner.output.tail_au (Type: float64)
+- secondary_cleaner.output.tail_pb (Type: float64)
+- primary_cleaner.output.concentrate_sol (Type: float64)
+- final.output.concentrate_sol (Type: float64)
+- primary_cleaner.output.tail_au (Type: float64)
+- final.output.tail_sol (Type: float64)
+- rougher.output.recovery (Type: float64)
+- primary_cleaner.output.concentrate_au (Type: float64)
+- rougher.output.concentrate_au (Type: float64)
+- rougher.output.tail_ag (Type: float64)
+- final.output.concentrate_pb (Type: float64)
+- final.output.concentrate_au (Type: float64)
+- final.output.tail_au (Type: float64)
+- rougher.output.concentrate_ag (Type: float64)
+- primary_cleaner.output.concentrate_pb (Type: float64)
+- secondary_cleaner.output.tail_ag (Type: float64)
+- rougher.output.concentrate_pb (Type: float64)
+- rougher.output.tail_au (Type: float64)
+- final.output.recovery (Type: float64)
+- final.output.tail_pb (Type: float64)
+- primary_cleaner.output.tail_sol (Type: float64)
+
+</details>
+
+An easy way to obtain this list of missing features in the test set that are present in the training is to utilize the `set()` functionality:
+
+```python
+train_columns = set(train_df.columns)
+test_columns = set(test_df.columns)
+
+missing_in_test = train_columns - test_columns
+```
+
+### Missing Values
+
+Here we highlight the inherent challenges in industrial process data collection. The training set exhibits 85 columns with missing values, with significant gaps in final output measurements
+and recovery data, notably 1,521 missing values in final output recovery. State measurements such as floatbank levels and air parameters show consistent patterns of 85 - 103 mising entries.
+The test set demonstrates a more extensive pattern of missing values, particularly in input and state parameters. While floatbank state measurements chonsistently express around 16 missing
+values, chemical input measurements display higher variability in missing data, randing from 166 to 353 missing values for xanthate measurements and up to 302 for sulfate readings. Feed
+measurements also show varying degrees of missingness across different parameters.
+
+### Missing Data Imputation
+
+In this section an experiment in filling time-series-like data is performed targeting several methodologies and data leakage. While dropping the values was 
