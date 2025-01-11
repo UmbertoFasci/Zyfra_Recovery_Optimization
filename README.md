@@ -187,7 +187,7 @@ matches the existing calculations in the dataset.
 This near-zero difference validates both our understanding of the recovery calculation process and the reliability of
 the provided data, ensuring a solid foundation for subsequent modeling efforts.
 
-## Raw Data Dilemmas
+## Missing Features & Values
 
 ### Missing Test Features
 
@@ -285,6 +285,39 @@ def rolling_average_interpolate(series, window):
     result[series.isna()] = combined_roll[series.isna()]
     return result
 ```
+#### Fill Comparison
 
 To compare the performance of the bi-directional rolling average interpolation procedure, performing a simple forward &rarr; backward fill procedure acts as the compartive method.
+
+![primary_cleaner.input.sulfate fill distribution comparison](https://github.com/UmbertoFasci/Zyfra_Recovery_Optimization/blob/main/documentation_assets/cell-14-output-4.png)
+
+Having a look at one feature distribution comparing the different fill methods exposes the forward and backward fill process as a zero generator. Since the method relies on the previous value to fill
+the next, this implies that a considerable amount of present zero values are followed by a missing value. Importantly, the rolling average procedure better maintained the distribution of the data.
+This can also be seen when having a look at another feature distribution comparing the same methods:
+
+![primary_cleaner.input.depressant fill distribution comparison](https://github.com/UmbertoFasci/Zyfra_Recovery_Optimization/blob/main/documentation_assets/cell-14-output-6.png)
+
+#### Fill Comparison - Model Performance
+
+To get a descent picture of how these filling methods truly perform in the context of modeling, a test modeling procedure is constructed in order to ascertain a more informed approach to deciding
+what processed dataset to utilize. For this model performance comparison an ensemble fill procedure utilizing the bi-directional rolling average and forward + backward fill was considered. After considering
+potential data leakage issues this ensemble method was also tested while excluding the backward fill procedure. The main comparison will be a baseline drop NaN procedure.
+
+Testing these missing value handling methods was performed with a **Random Forest Regressor** model, and resulted in the following:
+
+For the `rougher.output.recovery`:
+
+- The filled approach performed slightly better with an MAE of 8.78 compared to the baseline’s 9.05.
+- Notably, the filled approach also showed more consistent performance with a lower standard deviation (0.76 vs 1.67), suggesting more stable predictions.
+- This indicates that for rougher output recovery, the additional data points and filling strategy are beneficial.
+
+However, for the `final.output.recovery`:
+
+- The baseline approach significantly outperformed the filled approach (MAE 6.47 vs 8.05).
+- The baseline also showed better stability with a lower standard deviation (0.98 vs 1.44).
+- This suggests that for final recovery, using only complete cases leads to more accurate predictions.
+
+>[!NOTE]
+>_The inclusion or exclusion of the backward fill method did not affect the model performance in any way._
+
 
