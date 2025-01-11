@@ -77,7 +77,7 @@ graph LR
 ```
 ## Data Description
 
-Given the technological process which the features originate frome they are named in the following format:
+Given the technological process which the features originate from they are named in the following format:
 
 ```
 [stage].[parameter_type].[parameter_name]
@@ -331,7 +331,7 @@ testing datasets. and concentration distributions by stage.
 ### Metal Concentration
 
 <img src="https://umbertofasci.github.io/Projects/OptimizingGoldRecovery_files/figure-html/cell-30-output-1.png" align="right"
-    alt="Zyfra logo" width="440" height="750">
+    alt="metal concentrations" width="440" height="750">
 
 The concentration changes of gold (AU), silver (AG), and lead (PB) are illustrated here throughout different stages of the earlier described technological process.
 Gold demonstrates the most significant enrichment, starting at 7.1 in the raw feed, increasing by 142.7% to 17.4 in the rougher concentrate, and finally
@@ -345,3 +345,17 @@ concentrate, showing a 32.5% increase in the final stage.
 
 These patterns reveal that the purification process is most effective for gold concentration while having varying effects on silver and lead, with silver notably being
 reduced in the final stage.
+
+> [!IMPORTANT]
+> The primary takeaway from this metal concentration analysis is that the technological purification procedure is most likely targeting gold concentration enrichment.
+> When knowing the source of the data, this is absolutely the case. In this way, this can be a supportive analysis to the present refining procedures.
+<br>
+<br>
+<br>
+<br>
+
+### Particle Size
+
+The analysis of particle size distributions between training and test datasets reveals a consistent bimodal pattern across both sets, characterized by a sharp, concentrated peak for primary cleaner input near size 0 (indicating finely ground particles) and a broader, lower distribution for rougher input centered around size 50 (suggesting more varied particle sizes). This visual consistency in distribution patterns between training and test sets suggests overall stability in the grinding and classification processes.
+
+![Particle Size](https://umbertofasci.github.io/Projects/OptimizingGoldRecovery_files/figure-html/cell-32-output-2.png)
