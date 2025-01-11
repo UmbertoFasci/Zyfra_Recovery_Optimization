@@ -8,7 +8,7 @@
 <img src="https://github.com/UmbertoFasci/Zyfra_Recovery_Optimization/blob/main/documentation_assets/zyfra.png" align="right"
     alt="Zyfra logo" width="180" height="180">
 
-In the mining industry, extracting gold from ore is a complex process that requires multiple stages of purification and refinement. The efficiency of this process, measured by the recovery rate, is crucial for both economic and environmental reasons. This project focuses on developing a machine learning model to predict the recovery rate of gold during the purification process, using data collected from various stages of a gold recovery plant.
+In the mining industry, extracting gold from ore is a complex process that requires multiple stages of purification and refinement. The efficiency of this process, measured by the recovery rate, which is crucial for both economic and environmental reasons. This project focuses on developing a machine learning model to predict the recovery rate of gold during the purification process, using data collected from various stages of a gold recovery plant.
 
 The dataset encompasses multiple parameters measured throughout the technological process, including concentrations of different metals (Au, Ag, Pb), particle sizes, and various other features recorded at different stages of purification. These measurements are time-stamped, creating a temporal dimension to our analysis that could reveal important patterns in the recovery process.
 
@@ -319,6 +319,10 @@ However, for the `final.output.recovery`:
 - The baseline approach significantly outperformed the filled approach (MAE 6.47 vs 8.05).
 - The baseline also showed better stability with a lower standard deviation (0.98 vs 1.44).
 - This suggests that for final recovery, using only complete cases leads to more accurate predictions.
+
+Given the overall performance of the missing value handling methods, and the desire to maintain whichever temporal effects that exist in the dataset. It was decided to continue with
+the bi-directional rolling average + forward fill (remaining missing) methods in order to not only maintain the temporal effects but to maintain the general density distribution
+of the present features.
 
 >[!NOTE]
 >_The inclusion or exclusion of the backward fill method did not affect the model performance in any way._
