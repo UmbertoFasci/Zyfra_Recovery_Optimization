@@ -253,7 +253,7 @@ measurements also show varying degrees of missingness across different parameter
 
 ### Missing Data Imputation
 
-#### Rolling Average Interpolation
+#### Bi-Directional Rolling Average Interpolation
 
 In this section an experiment in filling time-series-like data is performed targeting several methodologies and data leakage. While dropping the values was
 an option, at this point I wanted to try and maintain the temporal effects of the dataset. The first approach that was made was to conduct a **rolling average interpolation**.
