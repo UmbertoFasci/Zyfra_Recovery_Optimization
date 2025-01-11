@@ -285,3 +285,6 @@ def rolling_average_interpolate(series, window):
     result[series.isna()] = combined_roll[series.isna()]
     return result
 ```
+
+To compare the performance of the bi-directional rolling average interpolation procedure, performing a simple forward &rarr; backward fill procedure acts as the compartive method.
+
