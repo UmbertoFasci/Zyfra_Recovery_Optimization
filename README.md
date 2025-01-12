@@ -387,7 +387,7 @@ different.
 | rougher.input.feed_size | `0.1935` | `5.994895e-143` |
 </div>
 
-The KS test resules indicate statistically significant differences between the training and test distributions, with p-values well below the **0.05** threshold for both measurements.
+The KS test results indicate statistically significant differences between the training and test distributions, with p-values well below the **0.05** threshold for both measurements.
 The primary cleaner input shows better alignment between sets with a lower KS statistic of **0.0520**, compared to the rougher input's higher statistic. WHile these differences are
 statistcally different, the relatively small KS statistic suggests that these variations are unlikely to substantially impact the model's predictive performance, they they should be
 considered during model evaluation and interpretation.
