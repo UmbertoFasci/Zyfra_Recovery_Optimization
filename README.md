@@ -398,7 +398,7 @@ For this section three main tasks must be performed: feature selection, alignmen
 These features include: particle size, concentration, state, and floatbank parameters while excluding target variables (recovery rates).
 
 > [!NOTE]
-> When a test dataset is provided, it ensures feature consistency by keeping only columns present in both training and test sets.
+> When a test dataset is provided, it ensures feature consistency by keeping only columns present in both training and test sets. This is where feature "alignment" takes place.
 
 The third portion of the feature preparation procedure standardizes the numerical features using `StandardScalar()` to normalize the data scale. To impliment this
 in python, a single function can be created:
