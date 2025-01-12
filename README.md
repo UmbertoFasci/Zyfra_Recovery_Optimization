@@ -391,3 +391,43 @@ The KS test results indicate statistically significant differences between the t
 The primary cleaner input shows better alignment between sets with a lower KS statistic of **0.0520**, compared to the rougher input's higher statistic. WHile these differences are
 statistcally different, the relatively small KS statistic suggests that these variations are unlikely to substantially impact the model's predictive performance, they they should be
 considered during model evaluation and interpretation.
+
+## Feature Preparation
+
+For this section three main tasks must be performed: feature selection, alignment, and standardization. First, relevant features related to feed characteristics were selected.
+These features include: particle size, concentration, state, and floatbank parameters while excluding target variables (recovery rates).
+
+> [!NOTE]
+> When a test dataset is provided, it ensures feature consistency by keeping only columns present in both training and test sets.
+
+The third portion of the feature preparation procedure standardizes the numerical features using `StandardScalar()` to normalize the data scale. To impliment this
+in python, a single function can be created:
+
+```python
+def prepare_features(train_df, test_df=None):
+    # Select relevant numerical features from training data
+    feature_columns = [col for col in train_df.columns if any(x in col for x in [ 
+        'feed', 'particle_size', 'concentration', 'state', 'floatbank'])]
+    
+    # Remove target columns
+    target_columns = ['rougher.output.recovery', 'final.output.recovery']
+    feature_columns = [col for col in feature_columns if col not in target_columns]
+    
+    # Only keep features present in both datasets
+    if test_df is not None:
+        feature_columns = [col for col in feature_columns if col in test_df.columns]
+        print(f"Number of aligned features: {len(feature_columns)}")
+    
+    X_train = train_df[feature_columns]
+    
+    # Scale features
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    
+    if test_df is not None:
+        X_test = test_df[feature_columns]
+        X_test_scaled = scaler.transform(X_test)
+        return X_train_scaled, X_test_scaled, feature_columns, scaler
+    
+    return X_train_scaled, feature_columns, scaler
+```
