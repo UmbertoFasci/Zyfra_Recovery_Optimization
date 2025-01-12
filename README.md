@@ -582,3 +582,8 @@ def tune_random_forest_optimized(X_train, X_test, y_train, y_test):
     grid_search.fit(X_train, y_train)
     return grid_search.best_estimator_, grid_search.best_params_
 ```
+
+## Modeling Function
+
+Here the main modeling procedure is defined where three separate models will be trained: Linear Regression, Random Forest, and a Tuned Random Forest.
+The linear regression model acts as a 
