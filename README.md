@@ -431,3 +431,38 @@ def prepare_features(train_df, test_df=None):
     
     return X_train_scaled, feature_columns, scaler
 ```
+
+## sMAPE Calculation
+
+The Symmetric Mean Absolute Percentage Error (sMAPE) is implemented here as a robust metric for evaluating the gold recovery prediction model’s performance. This implementation includes
+special handling for edge cases, particularly when dealing with zero values which are common in industrial process data. The function calculates the percentage error by taking the
+absolute difference between predicted and actual values (numerator) and dividing it by the average of their absolute values (denominator), then multiplying by 100 to express it as a percentage.
+
+```math
+sMAPE = \frac{1}{N} \sum_{i=1}^{N} \frac{| y_{i} - \hat{y}_{i}|}{(|y_{i}| + |\hat{y}_{i}|)/2} \times 100\%
+```
+The symmetrical nature of sMAPE makes it particularly suitable for our gold recovery predictions because it treats over-predictions and under-predictions equally, which is crucial when optimizing recovery processes where both types of errors can be costly. The function includes safeguards against division by zero and handles invalid cases gracefully, returning 0 when no valid calculations can be made. This is especially important in industrial applications where we need reliable error measurements to make operational decisions about the recovery process.
+
+This sMAPE implimentation can be done using a simple python function:
+
+```python
+def calculate_smape(y_true, y_pred):
+    # Convert inputs to numpy arrays
+    y_true = np.array(y_true)
+    y_pred = np.array(y_pred)
+    
+    # Handle cases where both true and predicted values are 0
+    denominator = (np.abs(y_true) + np.abs(y_pred)) / 2
+    
+    # Create a mask for valid entries (non-zero denominator)
+    valid_mask = denominator != 0
+    
+    if not np.any(valid_mask):
+        return 0.0  # Return 0 if all denominators are 0
+    
+    # Calculate sMAPE only for valid entries
+    numerator = np.abs(y_true - y_pred)
+    smape = np.mean(np.divide(numerator[valid_mask], denominator[valid_mask])) * 100
+    
+    return smape
+```
