@@ -586,4 +586,36 @@ def tune_random_forest_optimized(X_train, X_test, y_train, y_test):
 ## Modeling Function
 
 Here the main modeling procedure is defined where three separate models will be trained: Linear Regression, Random Forest, and a Tuned Random Forest.
-The linear regression model acts as a 
+The linear regression model acts as a baseline to compare model performance. The tuned random forest model represents the most sophisticated approach,
+incorporating optimal hyperparameters.
+
+```python
+def build_and_evaluate_models_optimized(X_train, X_test, y_train, y_test):
+    models = {}
+    
+    # Linear Regression
+    print("Training Linear Regression...")
+    lr_model = LinearRegression()
+    lr_model.fit(X_train, y_train)
+    lr_metrics = evaluate_model(lr_model, X_train, X_test, y_train, y_test, "Linear Regression")
+    models['linear_regression'] = {'model': lr_model, 'metrics': lr_metrics}
+    
+    # Basic Random Forest
+    print("Training Basic Random Forest...")
+    rf_model = RandomForestRegressor(n_estimators=50, random_state=12345, n_jobs=-1)
+    rf_model.fit(X_train, y_train)
+    rf_metrics = evaluate_model(rf_model, X_train, X_test, y_train, y_test, "Basic Random Forest")
+    models['basic_rf'] = {'model': rf_model, 'metrics': rf_metrics}
+    
+    # Tuned Random Forest
+    print("Training Tuned Random Forest...")
+    best_rf, best_params = tune_random_forest_optimized(X_train, X_test, y_train, y_test)
+    tuned_rf_metrics = evaluate_model(best_rf, X_train, X_test, y_train, y_test, "Tuned Random Forest")
+    models['tuned_rf'] = {
+        'model': best_rf,
+        'metrics': tuned_rf_metrics,
+        'best_params': best_params
+    }
+    
+    return models
+```
