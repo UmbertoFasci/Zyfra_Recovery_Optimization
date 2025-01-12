@@ -619,3 +619,24 @@ def build_and_evaluate_models_optimized(X_train, X_test, y_train, y_test):
     
     return models
 ```
+
+Here is the same modeling procedure represented as a diagram:
+
+```mermaid
+flowchart TD
+    Data[Load Train/Test Data]
+    
+    Data --> LR[Linear Regression]
+    Data --> RF[Basic Random Forest<br>n_estimators=50]
+    Data --> TRF[Tuned Random Forest<br>with GridSearchCV]
+    
+    LR --> E1[Evaluate Metrics]
+    RF --> E2[Evaluate Metrics]
+    TRF --> E3[Evaluate Metrics]
+    
+    E1 --> Store1[Store Model & Metrics]
+    E2 --> Store2[Store Model & Metrics]
+    E3 --> Store3[Store Model,<br>Metrics & Best Params]
+    
+    Store1 & Store2 & Store3 --> Return[Return All Models<br>and Results]
+```
