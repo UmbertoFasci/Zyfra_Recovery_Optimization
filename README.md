@@ -264,7 +264,7 @@ This interpolation formula creates a bidirectional moving average by computing b
 directions to produce more balanced estimates.
 
 ```math
-Combined  Average(t) = \frac{1}{2} (\frac{\sum_{i=t}^{t+w} X_{i}}{w} + \frac{\sum_{i=t-w}^{t} X_{i}}{w})
+Combined \ \ Average(t) = \frac{1}{2} (\frac{\sum_{i=t}^{t+w} X_{i}}{w} + \frac{\sum_{i=t-w}^{t} X_{i}}{w})
 ```
 where,
 
@@ -465,4 +465,38 @@ def calculate_smape(y_true, y_pred):
     smape = np.mean(np.divide(numerator[valid_mask], denominator[valid_mask])) * 100
     
     return smape
+```
+
+## Final sMAPE Calculation
+
+The final sMAPE is specifically designed for the gold recovery process, coombining error measurements from both the rougher and final recovery stages.
+The function calculates the individual sMAPE values for each stage and then applies a weighted average where the rougher stage contributes 25% nad the
+final stage contribues 75% to the overall score. This weighting reflects the greater importance of accuracy in the final recovery stage, which directly
+impacts the end product quality.
+
+```math
+Final \ \ sMAPE = 25\% \times sMAPE(rougher) + 75\% \times sMAPE(final)
+```
+
+This is formulated in a python function which also provides diagnostic information, displaying the range of the true and predicted values for both stages
+along with their individual sMAPE scores, which helps in understanding where prediction errors are occurring and their relative magnitudes. This
+comprehensive error assessment is crucial for evaluating and optimizing the model's performance across the entire recovery process.
+
+```python
+def calculate_final_smape(y_true_rougher, y_pred_rougher, y_true_final, y_pred_final):
+    rougher_smape = calculate_smape(y_true_rougher, y_pred_rougher)
+    final_smape = calculate_smape(y_true_final, y_pred_final)
+    
+    # Print sNAPE information
+    print(f"Rougher sMAPE components:")
+    print(f"  Range of true values: [{np.min(y_true_rougher):.2f}, {np.max(y_true_rougher):.2f}]")
+    print(f"  Range of predicted values: [{np.min(y_pred_rougher):.2f}, {np.max(y_pred_rougher):.2f}]")
+    print(f"  Calculated rougher sMAPE: {rougher_smape:.2f}")
+    
+    print(f"\nFinal sMAPE components:")
+    print(f"  Range of true values: [{np.min(y_true_final):.2f}, {np.max(y_true_final):.2f}]")
+    print(f"  Range of predicted values: [{np.min(y_pred_final):.2f}, {np.max(y_pred_final):.2f}]")
+    print(f"  Calculated final sMAPE: {final_smape:.2f}")
+    
+    return 0.25 * rougher_smape + 0.75 * final_smape
 ```
