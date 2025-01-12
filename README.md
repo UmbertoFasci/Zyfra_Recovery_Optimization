@@ -392,6 +392,10 @@ The primary cleaner input shows better alignment between sets with a lower KS st
 statistcally different, the relatively small KS statistic suggests that these variations are unlikely to substantially impact the model's predictive performance, they they should be
 considered during model evaluation and interpretation.
 
+# Helper Functions
+
+The following is a collection of all the helper functions used for preparing the features, calculation sMAPE/final sMAPE, implemtning modeling/optimization, and evaluation procedures.
+
 ## Feature Preparation
 
 For this section three main tasks must be performed: feature selection, alignment, and standardization. First, relevant features related to feed characteristics were selected.
@@ -499,4 +503,79 @@ def calculate_final_smape(y_true_rougher, y_pred_rougher, y_true_final, y_pred_f
     print(f"  Calculated final sMAPE: {final_smape:.2f}")
     
     return 0.25 * rougher_smape + 0.75 * final_smape
+```
+## Model Evaluation
+
+Here Mean Absolute Error and sMAPE metrics are prepared to handle model evaluation. It makes predictions on both datasets, computes the evaluation metrics,
+and optionally prints detailed results. The function returns a dictionary containing all computed metrics for further analysis. Additionally, verbosity is
+implemented as a parameter option since all metric results are stored.
+
+```python
+# Model Evaluation Functions
+def evaluate_model(model, X_train, X_test, y_train, y_test, model_name="", verbose=True):
+    # Make predictions
+    train_pred = model.predict(X_train)
+    test_pred = model.predict(X_test)
+    
+    # Calculate metrics
+    train_mae = mean_absolute_error(y_train, train_pred)
+    test_mae = mean_absolute_error(y_test, test_pred)
+    train_smape = calculate_smape(y_train, train_pred)
+    test_smape = calculate_smape(y_test, test_pred)
+    
+    if verbose:
+        print(f"\n{model_name} Evaluation Results:")
+        print("-" * 40)
+        print(f"Training MAE: {train_mae:.4f}")
+        print(f"Test MAE: {test_mae:.4f}")
+        print(f"Training sMAPE: {train_smape:.4f}")
+        print(f"Test sMAPE: {test_smape:.4f}")
+        
+    return {
+        'train_mae': train_mae,
+        'test_mae': test_mae,
+        'train_smape': train_smape,
+        'test_smape': test_smape
+    }
+```
+
+## Cross-Validation Implimentation
+
+Here, a cross-validation procedure is defined, and returns both the mean and standard deviation of cross-validation scores, providing insight into model
+consistency across different data subsets.
+
+```python
+def perform_cross_validation(model, X, y, cv=5):
+    cv_scores = cross_val_score(model, X, y, cv=cv, scoring='neg_mean_absolute_error')
+    cv_scores = -cv_scores  # Convert negative MAE to positive
+    return cv_scores.mean(), cv_scores.std()
+```
+
+## Random Forest Optimization
+
+Hyperparameter optimization for the **Random Forest Regressor** model is defined utilizing `GridSearchCV` to systematically explore different
+combinations of key parameters. It explores four hyperparameters: number of trees (30-200), maximum tree depth (10-30), minimum samples for
+splitting nodes (5), and minimum samples per leaf (2). The optimization process uses 3-fold cross-validation with negative means absolute
+error as the scoirng metric. The best performing model configuration is returned.
+
+```python
+def tune_random_forest_optimized(X_train, X_test, y_train, y_test):
+    param_grid = {
+        'n_estimators': [30, 50, 100, 200],
+        'max_depth': [10, 20, 30],
+        'min_samples_split': [5],
+        'min_samples_leaf': [2]
+    }
+    
+    base_rf = RandomForestRegressor(random_state=42, n_jobs=-1)
+    grid_search = GridSearchCV(
+        base_rf,
+        param_grid,
+        cv=3,
+        scoring='neg_mean_absolute_error',
+        n_jobs=-1
+    )
+    
+    grid_search.fit(X_train, y_train)
+    return grid_search.best_estimator_, grid_search.best_params_
 ```
