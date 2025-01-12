@@ -294,8 +294,11 @@ To compare the performance of the bi-directional rolling average interpolation p
 
 ![primary_cleaner.input.sulfate fill distribution comparison](https://github.com/UmbertoFasci/Zyfra_Recovery_Optimization/blob/main/documentation_assets/cell-14-output-4.png)
 
-Having a look at one feature distribution comparing the different fill methods exposes the forward and backward fill process as a zero generator. Since the method relies on the previous value to fill
-the next, this implies that a considerable amount of present zero values are followed by a missing value. Importantly, the rolling average procedure better maintained the distribution of the data.
+Having a look at one feature distribution comparing the different fill methods exposes the forward and backward fill process as a zero generator.
+> [!IMPORTANT]
+>This implies that a considerable amount of present zero values are followed by a missing value.
+
+Importantly, the rolling average procedure better maintained the distribution of the data.
 This can also be seen when having a look at another feature distribution comparing the same methods:
 
 ![primary_cleaner.input.depressant fill distribution comparison](https://github.com/UmbertoFasci/Zyfra_Recovery_Optimization/blob/main/documentation_assets/cell-14-output-6.png)
