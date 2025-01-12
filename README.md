@@ -329,8 +329,8 @@ of the present features.
 
 ## Analysis
 
-The analysis of the given dataset will focus on three factors: metal concentration change through the main stages of the technological processes, particle size distribution comparisons between provided training and
-testing datasets. and concentration distributions by stage.
+The analysis of the given dataset will focus on three factors: metal concentration change through the main stages of the technological processes, particle size
+distribution comparisons between provided training and testing datasets. and concentration distributions by stage.
 
 ### Metal Concentration
 
@@ -350,16 +350,44 @@ concentrate, showing a 32.5% increase in the final stage.
 These patterns reveal that the purification process is most effective for gold concentration while having varying effects on silver and lead, with silver notably being
 reduced in the final stage.
 
-> [!IMPORTANT]
+> [!NOTE]
 > The primary takeaway from this metal concentration analysis is that the technological purification procedure is most likely targeting gold concentration enrichment.
 > When knowing the source of the data, this is absolutely the case. In this way, this can be a supportive analysis to the present refining procedures.
-<br>
-<br>
-<br>
-<br>
+
+
+
+| Metal | Raw Concentration | Final Concentration | 
+|--------|------------|------------|
+| Gold | `7.1` | `39.4` |
+| Silver | `7.8` | `4.7` |
+| Lead | `3.2` | `9.1` |
+
 
 ### Particle Size
 
-The analysis of particle size distributions between training and test datasets reveals a consistent bimodal pattern across both sets, characterized by a sharp, concentrated peak for primary cleaner input near size 0 (indicating finely ground particles) and a broader, lower distribution for rougher input centered around size 50 (suggesting more varied particle sizes). This visual consistency in distribution patterns between training and test sets suggests overall stability in the grinding and classification processes.
+The analysis of particle size distributions between training and test datasets reveals a consistent bimodal pattern across both sets, characterized by a sharp,
+concentrated peak for primary cleaner input near size 0 (indicating finely ground particles) and a broader, lower distribution for rougher input centered around
+size 50 (suggesting more varied particle sizes). This visual consistency in distribution patterns between training and test sets suggests overall stability in the
+grinding and classification processes.
 
 ![Particle Size](https://umbertofasci.github.io/Projects/OptimizingGoldRecovery_files/figure-html/cell-32-output-2.png)
+
+While the size distribution between the sets may look the same visually, we can statistically ascertain just how similar these distributions are between each other.
+For the purposes of this use-case the **Kolmogorov-Smirnov Test** or **KS Test** is applied. The KS test is a non-parametric and distribution-free test, meaning
+it makes no assumption about the distribution of data. By utilizing this test, we can compare these dsitributions appropriately and determine if they are significantly
+different.
+
+<div align="center">
+
+**Kolmogorov-Smirnov Test**
+
+| Feature | KS statistic | p-value | 
+|--------|------------|------------|
+| primary_cleaner.input.feed_size | `0.0520` | `1.202248e-10` |
+| rougher.input.feed_size | `0.1935` | `5.994895e-143` |
+</div>
+
+The KS test resules indicate statistically significant differences between the training and test distributions, with p-values well below the **0.05** threshold for both measurements.
+The primary cleaner input shows better alignment between sets with a lower KS statistic of **0.0520**, compared to the rougher input's higher statistic. WHile these differences are
+statistcally different, the relatively small KS statistic suggests that these variations are unlikely to substantially impact the model's predictive performance, they they should be
+considered during model evaluation and interpretation.
