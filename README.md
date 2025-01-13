@@ -673,7 +673,7 @@ y_train_final_sample = y_train_final.iloc[sample_indices]
 ```
 The sampling is applied consistently across both feature matrix (X_train) and target variables (rougher and final recovery rates), preserving the relationships between inputs and outputs. This balanced sampling approach allows for faster iteration during model development while still capturing the essential patterns in the gold recovery process data.
 
-### Final Modeling
+## Final Modeling
 
 Conducting the final modeling step is as simple as running the previously defined functions.
 ```python
@@ -695,3 +695,25 @@ For the rougher recovery stage, Linear Regression showed consistent but modest p
 
 
 ![model results](https://github.com/UmbertoFasci/Zyfra_Recovery_Optimization/blob/main/documentation_assets/model_results.png)
+
+## Final sMAPE
+
+| Model | Stage | True Value Range | Predicted Value Range | sMAPE |
+|--------|--------|-----------------|---------------------|--------|
+| Linear Regression | Rougher | `[0.00, 100.00]` | `[51.24, 125.88]` | `10.67` |
+| Linear Regression | Final | `[0.00, 100.00]` | `[35.38, 107.49]` | `10.91` |
+| Basic RF | Rougher | `[0.00, 100.00]` | `[1.71, 96.92]` | `8.17` |
+| Basic RF | Final | `[0.00, 100.00]` | `[19.68, 100.00]` | `8.16` |
+| Tuned RF | Rougher | `[0.00, 100.00]` | `[2.90, 96.05]` | `7.9` |
+| Tuned RF | Final | `[0.00, 100.00]` | `[21.32, 100.00]` | `7.99` |
+
+The Linear Regression model showed the highest combined sMAPE of 10.89%, with prediction ranges exceeding the true value bounds, indicating potential overestimation issues. The Basic Random Forest improved significantly with a combined sMAPE of 8.23%, while the Tuned Random Forest achieved the best performance with a combined sMAPE of 8.05%. The prediction ranges for both Random Forest models stayed closer to the actual value range of 0-100%, suggesting better calibrated predictions. The tuned model’s marginally better performance and more conservative prediction ranges make it the most suitable choice for the gold recovery prediction task, balancing accuracy with prediction reliability.
+
+The final results summary reveals the optimal configurations and comparative performance metrics across all models. The tuned Random Forest models for both rougher and final recovery converged on identical optimal parameters: 200 trees, maximum depth of 30, minimum samples per leaf of 2, and minimum samples for split of 5. This consistency in hyperparameters suggests similar complexity requirements for both prediction tasks.
+
+Linear Regression showed consistent but higher error rates (MAE ~6.3-6.9, sMAPE ~10.3-11.0%) across both recovery stages. Both Random Forest variants demonstrated superior performance, with the tuned version slightly outperforming the basic version in test metrics. The tuned model achieved test MAE of 4.25 and sMAPE of 8.04% for rougher recovery, and test MAE of 4.65 and sMAPE of 8.05% for final recovery. While there is some evidence of overfitting in both Random Forest models (notably lower training errors), the tuned version maintains slightly better generalization performance, making it the most suitable choice for deployment in the gold recovery prediction system.
+
+# Conclusion
+Based on the analysis and modeling of the gold recovery process data, we can draw several key conclusions about the optimal approach to predicting recovery efficiency. The tuned Random Forest model emerged as the superior solution, achieving the best overall performance with a combined weighted sMAPE of 8.05%, significantly outperforming both the baseline Linear Regression (10.90%) and the basic Random Forest (8.23%). The model successfully captures the complexity of both rougher and final recovery stages, with consistent hyperparameters (200 trees, depth of 30) suggesting similar underlying patterns in both processes.
+
+The model evaluation revealed important insights about the process itself: the concentration patterns showed expected enrichment of gold through the stages, particle size distributions remained consistent between training and test sets despite statistical differences, and the careful handling of missing values through rolling average interpolation preserved the temporal characteristics of the data. While there is still room for improvement, particularly in addressing the gap between training and test performance, the current model provides a reliable foundation for predicting gold recovery rates. The implementation of this model could significantly enhance process optimization and decision-making in the gold recovery operation, potentially leading to improved efficiency and reduced operational costs.
