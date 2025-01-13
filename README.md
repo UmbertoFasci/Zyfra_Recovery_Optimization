@@ -640,3 +640,75 @@ flowchart TD
     
     Store1 & Store2 & Store3 --> Return[Return All Models<br>and Results]
 ```
+# Modeling Procedure
+
+## Data Preparation
+The data preparation phase for the gold recovery prediction model involves a comprehensive preprocessing approach that successfully aligns 49 features between the training and test datasets. The process begins with feature scaling and preparation through the `prepare_features` function, which ensures consistent feature representation across datasets. Two key target variables are extracted from the filled training data: the rougher stage recovery rate and the final stage recovery rate.
+
+The data is then partitioned using an 80-20 train-validation split with a fixed random state. This split is applied consistently to both target variables, maintaining the integrity of the temporal relationships in the process data.
+```python
+# Prepare features and targets
+X_train_scaled, X_test_scaled, feature_columns, scaler = prepare_features(
+    filled_train_df, filled_test_df)
+
+# Prepare targets
+y_train_rougher = filled_train_df['rougher.output.recovery']
+y_train_final = filled_train_df['final.output.recovery']
+
+# Split data
+X_train, X_val, y_train_rougher, y_val_rougher = train_test_split(
+    X_train_scaled, y_train_rougher, test_size=0.2, random_state=12345)
+_, _, y_train_final, y_val_final = train_test_split(
+    X_train_scaled, y_train_final, test_size=0.2, random_state=12345)
+```
+With the features prepared, a more manageable subset is created to significantly reduce the computational time during the initial model development and tuning phases.
+```python
+# Sample the data, reduce training time.
+sample_size = 6000
+sample_indices = np.random.choice(len(X_train), sample_size, replace=False)
+
+X_train_sample = X_train[sample_indices]
+y_train_rougher_sample = y_train_rougher.iloc[sample_indices]
+y_train_final_sample = y_train_final.iloc[sample_indices]
+```
+The sampling is applied consistently across both feature matrix (X_train) and target variables (rougher and final recovery rates), preserving the relationships between inputs and outputs. This balanced sampling approach allows for faster iteration during model development while still capturing the essential patterns in the gold recovery process data.
+
+### Final Modeling
+
+Conducting the final modeling step is as simple as running the previously defined functions.
+```python
+# Train models
+print("\nTraining models for rougher recovery:")
+rougher_models = build_and_evaluate_models_optimized(
+    X_train_sample, X_val, 
+    y_train_rougher_sample, y_val_rougher
+)
+
+
+print("\nTraining models for final recovery:")
+final_models = build_and_evaluate_models_optimized(
+    X_train_sample, X_val, 
+    y_train_final_sample, y_val_final
+)
+```
+For the rougher recovery stage, Linear Regression showed consistent but modest performance with training/test MAE around 6.7-6.9 and sMAPE around 10.4-10.6%. Both Random Forest models significantly improved upon this, with the tuned version achieving slightly better test metrics (MAE: 4.25, sMAPE: 8.04%) compared to the basic version. Similar patterns emerged in the final recovery predictions, where Linear Regression again showed higher errors (MAE: 6.3-6.7, sMAPE: 10.3-10.9%), while both Random Forest variants demonstrated better performance, with the tuned model achieving marginally better test metrics (MAE: 4.64, sMAPE: 8.05%). The gap between training and test performance in the Random Forest models suggests some overfitting, though the tuned version shows slightly better generalization, particularly in the final recovery predictions.
+
+<div align="center">
+
+**Modeling Metrics**
+
+| Model Type | Recovery Type | Metric | Training | Test |
+|------------|----------------|---------|-----------|------|
+| Linear Regression | Rougher | MAE | `6.8421` | `6.9611` |
+| Linear Regression | Rougher | sMAPE | `10.5918` | `10.6660` |
+| Basic Random Forest | Rougher | MAE | `1.7134` | `4.2492` |
+| Basic Random Forest | Rougher | sMAPE | `5.4860` | `8.1685` |
+| Tuned Random Forest | Rougher | MAE | `2.0006` | `4.1228` |
+| Tuned Random Forest | Rougher | sMAPE | `5.8330` | `7.9791` |
+| Linear Regression | Final | MAE | `6.4453` | `6.6985` |
+| Linear Regression | Final | sMAPE | `10.7009` | `10.9889` |
+| Basic Random Forest | Final | MAE | `1.7309` | `4.7238` |
+| Basic Random Forest | Final | sMAPE | `3.9751` | `8.1635` |
+| Tuned Random Forest | Final | MAE | `1.9241` | `4.6137` |
+| Tuned Random Forest | Final | sMAPE | `4.1946` | `7.9889` |
+</div>
