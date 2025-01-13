@@ -693,22 +693,5 @@ final_models = build_and_evaluate_models_optimized(
 ```
 For the rougher recovery stage, Linear Regression showed consistent but modest performance with training/test MAE around 6.7-6.9 and sMAPE around 10.4-10.6%. Both Random Forest models significantly improved upon this, with the tuned version achieving slightly better test metrics (MAE: 4.25, sMAPE: 8.04%) compared to the basic version. Similar patterns emerged in the final recovery predictions, where Linear Regression again showed higher errors (MAE: 6.3-6.7, sMAPE: 10.3-10.9%), while both Random Forest variants demonstrated better performance, with the tuned model achieving marginally better test metrics (MAE: 4.64, sMAPE: 8.05%). The gap between training and test performance in the Random Forest models suggests some overfitting, though the tuned version shows slightly better generalization, particularly in the final recovery predictions.
 
-<div align="center">
 
-**Modeling Metrics**
-
-| Model Type | Recovery Type | Metric | Training | Test |
-|------------|----------------|---------|-----------|------|
-| Linear Regression | Rougher | MAE | `6.8421` | `6.9611` |
-| Linear Regression | Rougher | sMAPE | `10.5918` | `10.6660` |
-| Basic Random Forest | Rougher | MAE | `1.7134` | `4.2492` |
-| Basic Random Forest | Rougher | sMAPE | `5.4860` | `8.1685` |
-| Tuned Random Forest | Rougher | MAE | `2.0006` | `4.1228` |
-| Tuned Random Forest | Rougher | sMAPE | `5.8330` | `7.9791` |
-| Linear Regression | Final | MAE | `6.4453` | `6.6985` |
-| Linear Regression | Final | sMAPE | `10.7009` | `10.9889` |
-| Basic Random Forest | Final | MAE | `1.7309` | `4.7238` |
-| Basic Random Forest | Final | sMAPE | `3.9751` | `8.1635` |
-| Tuned Random Forest | Final | MAE | `1.9241` | `4.6137` |
-| Tuned Random Forest | Final | sMAPE | `4.1946` | `7.9889` |
-</div>
+![model results](https://github.com/UmbertoFasci/Zyfra_Recovery_Optimization/blob/main/documentation_assets/model_results.png)
