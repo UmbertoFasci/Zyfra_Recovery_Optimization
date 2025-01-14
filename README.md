@@ -698,14 +698,7 @@ For the rougher recovery stage, Linear Regression showed consistent but modest p
 
 ## Final sMAPE
 
-| Model | Stage | True Value Range | Predicted Value Range | sMAPE |
-|--------|--------|-----------------|---------------------|--------|
-| Linear Regression | Rougher | `[0.00, 100.00]` | `[51.24, 125.88]` | `10.67` |
-| Linear Regression | Final | `[0.00, 100.00]` | `[35.38, 107.49]` | `10.91` |
-| Basic RF | Rougher | `[0.00, 100.00]` | `[1.71, 96.92]` | `8.17` |
-| Basic RF | Final | `[0.00, 100.00]` | `[19.68, 100.00]` | `8.16` |
-| Tuned RF | Rougher | `[0.00, 100.00]` | `[2.90, 96.05]` | `7.9` |
-| Tuned RF | Final | `[0.00, 100.00]` | `[21.32, 100.00]` | `7.99` |
+![smape results](https://github.com/UmbertoFasci/Zyfra_Recovery_Optimization/blob/main/documentation_assets/smape_results.png)
 
 The Linear Regression model showed the highest combined sMAPE of 10.89%, with prediction ranges exceeding the true value bounds, indicating potential overestimation issues. The Basic Random Forest improved significantly with a combined sMAPE of 8.23%, while the Tuned Random Forest achieved the best performance with a combined sMAPE of 8.05%. The prediction ranges for both Random Forest models stayed closer to the actual value range of 0-100%, suggesting better calibrated predictions. The tuned model’s marginally better performance and more conservative prediction ranges make it the most suitable choice for the gold recovery prediction task, balancing accuracy with prediction reliability.
 
