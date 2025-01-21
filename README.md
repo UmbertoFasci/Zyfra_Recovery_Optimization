@@ -32,19 +32,10 @@ The project's success will be measured using the Symmetric Mean Absolute Percent
 In order to develop a proper workflow for optimization we must first understand what is to be optimized. In this case, understanding the technological process of gold extraction is essential.
 Mined ore undergoes primary processing to get the ore mixture or rougher feed, which is the raw material for ploatation (also known as the rougher process). After flotation, the material is
 sent to a two-stage purification.
-
-```mermaid
-flowchart TD
-    A[Gold ore mixture] --> |input| B[/Flotation\]
-    B --> |process| C(Rougher concentrate)
-    B --> |tails| D@{ shape: procs, label: "Rougher tails" }
-    C --> E(First stage of cleaner process)
-    E --> |tails| D
-    E --> F(Second stage of cleaner process)
-    F --> |tails| D
-    F --> |output| G[Final concentrate]
-```
-
+<div align="center">
+<img src="https://github.com/UmbertoFasci/Zyfra_Recovery_Optimization/blob/main/documentation_assets/Technical_Procedure.png" align="center"
+    alt="technical procedure">
+</div>
 ### Flotation
 - Gold ore mixture is fed into the float banks to obtain rougher Au concentrate and roughter `tails` (product residues with low concentration of valuable metals).
 - The stability of this process is affected by the volatile and non-optimal physicochemical state of the `flotation pulp` (a mixture of solid particles and liquid). 
@@ -94,20 +85,9 @@ Given the technological process which the features originate from they are named
 ```
 With this in mind we can take another look at the technological process where we can then infer the feature
 names present in the dataset.
-
-```mermaid
-flowchart TD
-    A[Gold ore mixture] --> |1| B[/Flotation\]
-    B --> |3| C(Rougher concentrate)
-    B --> |2| D@{ shape: procs, label: "Rougher tails" }
-    C --> E(First stage of cleaner process)
-    E --> |4| D
-    E --> |5| F(Second stage of cleaner process)
-    F --> |6| D
-    F --> |7| G[Final concentrate]
-```
-
 <div align="center">
+<img src="https://github.com/UmbertoFasci/Zyfra_Recovery_Optimization/blob/main/documentation_assets/Data_Description.png" alt="data descriptions">
+
     
 | # | Feature Name |
 |--------|------------|
