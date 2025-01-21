@@ -331,7 +331,7 @@ if __name__ == "__main__":
     filled_train_df = train_df.copy()
     filled_test_df = test_df.copy()
     
-    # Your existing feature preparation
+    # Existing feature preparation
     X_train_scaled, X_test_scaled, feature_columns, scaler = prepare_features(
         filled_train_df, filled_test_df)
     
