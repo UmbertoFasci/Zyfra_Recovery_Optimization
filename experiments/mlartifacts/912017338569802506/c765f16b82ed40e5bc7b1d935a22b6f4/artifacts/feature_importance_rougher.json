@@ -1,0 +1,198 @@
+[
+  {
+    "feature": "rougher.input.floatbank11_sulfate",
+    "importance": 0.13412422694102816
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank4_a_air",
+    "importance": 0.06183961249685388
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank4_b_air",
+    "importance": 0.04562086921844719
+  },
+  {
+    "feature": "rougher.input.feed_ag",
+    "importance": 0.03609389298256548
+  },
+  {
+    "feature": "primary_cleaner.state.floatbank8_d_air",
+    "importance": 0.031230002824919376
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank2_b_air",
+    "importance": 0.030608016271016322
+  },
+  {
+    "feature": "rougher.input.floatbank10_xanthate",
+    "importance": 0.030587710679404204
+  },
+  {
+    "feature": "rougher.input.floatbank11_xanthate",
+    "importance": 0.028305428150742315
+  },
+  {
+    "feature": "rougher.input.feed_sol",
+    "importance": 0.026155685171799038
+  },
+  {
+    "feature": "rougher.state.floatbank10_a_air",
+    "importance": 0.02492960772104819
+  },
+  {
+    "feature": "rougher.state.floatbank10_d_air",
+    "importance": 0.024879358572579405
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank6_a_air",
+    "importance": 0.024775470773180323
+  },
+  {
+    "feature": "rougher.input.feed_size",
+    "importance": 0.02424444287046722
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank2_a_air",
+    "importance": 0.023133992457599586
+  },
+  {
+    "feature": "rougher.input.feed_pb",
+    "importance": 0.02275168652346983
+  },
+  {
+    "feature": "rougher.state.floatbank10_b_air",
+    "importance": 0.02274862975215515
+  },
+  {
+    "feature": "primary_cleaner.state.floatbank8_d_level",
+    "importance": 0.020865958539022636
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank5_a_air",
+    "importance": 0.020159296270887708
+  },
+  {
+    "feature": "rougher.state.floatbank10_c_air",
+    "importance": 0.019860270100544652
+  },
+  {
+    "feature": "primary_cleaner.input.feed_size",
+    "importance": 0.017603831946080176
+  },
+  {
+    "feature": "rougher.input.floatbank10_sulfate",
+    "importance": 0.0173938084579081
+  },
+  {
+    "feature": "rougher.state.floatbank10_e_level",
+    "importance": 0.01682313629894722
+  },
+  {
+    "feature": "primary_cleaner.state.floatbank8_a_level",
+    "importance": 0.016387948363429453
+  },
+  {
+    "feature": "rougher.state.floatbank10_e_air",
+    "importance": 0.016381095720047242
+  },
+  {
+    "feature": "rougher.state.floatbank10_f_level",
+    "importance": 0.015953477095010105
+  },
+  {
+    "feature": "rougher.input.feed_au",
+    "importance": 0.015741405897403173
+  },
+  {
+    "feature": "rougher.input.feed_rate",
+    "importance": 0.014822461366800625
+  },
+  {
+    "feature": "rougher.state.floatbank10_a_level",
+    "importance": 0.014075444673407598
+  },
+  {
+    "feature": "primary_cleaner.state.floatbank8_c_level",
+    "importance": 0.013700034362276776
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank5_b_level",
+    "importance": 0.0134644253935622
+  },
+  {
+    "feature": "rougher.state.floatbank10_b_level",
+    "importance": 0.013066735932765038
+  },
+  {
+    "feature": "primary_cleaner.state.floatbank8_b_air",
+    "importance": 0.010939477573941021
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank3_b_air",
+    "importance": 0.010553097637894042
+  },
+  {
+    "feature": "primary_cleaner.state.floatbank8_c_air",
+    "importance": 0.01050144551975012
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank5_b_air",
+    "importance": 0.010464488844897306
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank4_b_level",
+    "importance": 0.009996901706504252
+  },
+  {
+    "feature": "primary_cleaner.state.floatbank8_a_air",
+    "importance": 0.009875540702546292
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank3_a_air",
+    "importance": 0.009735634116901523
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank2_a_level",
+    "importance": 0.009186748750298748
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank4_a_level",
+    "importance": 0.0090966145630213
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank3_b_level",
+    "importance": 0.009041754368644244
+  },
+  {
+    "feature": "rougher.state.floatbank10_d_level",
+    "importance": 0.008806686001000392
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank2_b_level",
+    "importance": 0.008748389110443533
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank6_a_level",
+    "importance": 0.008644937022622812
+  },
+  {
+    "feature": "primary_cleaner.state.floatbank8_b_level",
+    "importance": 0.008503432592839383
+  },
+  {
+    "feature": "rougher.state.floatbank10_f_air",
+    "importance": 0.007928466484159792
+  },
+  {
+    "feature": "rougher.state.floatbank10_c_level",
+    "importance": 0.007262686964207173
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank3_a_level",
+    "importance": 0.006809411290726014
+  },
+  {
+    "feature": "secondary_cleaner.state.floatbank5_a_level",
+    "importance": 0.005576322924233744
+  }
+]

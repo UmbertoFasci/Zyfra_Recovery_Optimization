@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/912017338569802506/f47c5f1c3474464ba7f9711c58661090/artifacts
+end_time: 1737575747079
+entry_point_name: ''
+experiment_id: '912017338569802506'
+lifecycle_stage: active
+run_id: f47c5f1c3474464ba7f9711c58661090
+run_name: rf_optimization_final
+run_uuid: f47c5f1c3474464ba7f9711c58661090
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1737575198684
+status: 3
+tags: []
+user_id: ujfasci

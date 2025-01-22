@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1737575747073
+current_stage: None
+description: ''
+last_updated_timestamp: 1737575747073
+name: gold_recovery_final
+run_id: f47c5f1c3474464ba7f9711c58661090
+run_link: ''
+source: mlflow-artifacts:/912017338569802506/f47c5f1c3474464ba7f9711c58661090/artifacts/model_final
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/912017338569802506/f47c5f1c3474464ba7f9711c58661090/artifacts/model_final
+user_id: null
+version: 1
