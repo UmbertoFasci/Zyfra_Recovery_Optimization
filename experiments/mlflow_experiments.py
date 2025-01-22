@@ -323,32 +323,35 @@ def log_model_metrics(metrics, stage="training"):
         mlflow.log_metric(f"{stage}_{metric_name}", value)
 
 if __name__ == "__main__":
-    # Set MLflow tracking URI
     mlflow.set_tracking_uri("http://127.0.0.1:8080")
     mlflow.set_experiment("Zyfra RF Model Optimization")
     
-    # data preparation code
     filled_train_df = train_df.copy()
     filled_test_df = test_df.copy()
     
-    # Existing feature preparation
     X_train_scaled, X_test_scaled, feature_columns, scaler = prepare_features(
         filled_train_df, filled_test_df)
     
-    # Prepare targets
     y_train_rougher = filled_train_df['rougher.output.recovery']
     y_train_final = filled_train_df['final.output.recovery']
     
-    # Split data
+    y_train_rougher = advanced_fill(y_train_rougher)
+    y_train_final = advanced_fill(y_train_final)
+
+    # Sample data before split
+    sample_size = min(3000, len(X_train_scaled))
+    indices = np.random.choice(len(X_train_scaled), sample_size, replace=False)
+    
+    X_train_scaled = X_train_scaled[indices]
+    y_train_rougher = y_train_rougher.iloc[indices]
+    y_train_final = y_train_final.iloc[indices]
+    
     X_train, X_test, y_train_rougher, y_test_rougher = train_test_split(
-        X_train_scaled, y_train_rougher, test_size=0.2, random_state=42
-    )
+        X_train_scaled, y_train_rougher, test_size=0.2, random_state=12345)
     _, _, y_train_final, y_test_final = train_test_split(
-        X_train_scaled, y_train_final, test_size=0.2, random_state=42
-    )
+        X_train_scaled, y_train_final, test_size=0.2, random_state=12345)
     
     rougher_model, final_model = train_models_with_tracking(
         X_train, X_test,
         y_train_rougher, y_test_rougher,
-        y_train_final, y_test_final
-    )
+        y_train_final, y_test_final)

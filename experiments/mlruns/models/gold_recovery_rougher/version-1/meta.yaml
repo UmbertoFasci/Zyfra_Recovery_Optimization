@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1737575198650
+current_stage: None
+description: ''
+last_updated_timestamp: 1737575198650
+name: gold_recovery_rougher
+run_id: c765f16b82ed40e5bc7b1d935a22b6f4
+run_link: ''
+source: mlflow-artifacts:/912017338569802506/c765f16b82ed40e5bc7b1d935a22b6f4/artifacts/model_rougher
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/912017338569802506/c765f16b82ed40e5bc7b1d935a22b6f4/artifacts/model_rougher
+user_id: null
+version: 1
