@@ -5,7 +5,7 @@
 
 ## Experiments
 
-![In Development](https://img.shields.io/badge/In%20Development-000000.svg?style=flat-square)
+![In Development](https://img.shields.io/badge/Pending%20Documentation-000000.svg?style=flat-square)
 
 Have a look at the **[Zyfra RF MLflow Experiment](https://github.com/users/UmbertoFasci/projects/9)** to keep track of MLflow implementation.
 
