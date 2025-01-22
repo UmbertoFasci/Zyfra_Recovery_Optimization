@@ -1,4 +1,4 @@
-# Zyfra - Optimizing Gold Recovery
+# Zyfra - Optimizing Gold Recovery Write-Up
 
 ## Original Portfolio Page
 [Zyfra - Gold Recovery Optimization](https://umbertofasci.github.io/Projects/OptimizingGoldRecovery.html)
