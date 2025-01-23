@@ -9,12 +9,6 @@
 ## Original Portfolio Page
 [Zyfra - Gold Recovery Optimization](https://umbertofasci.github.io/Projects/OptimizingGoldRecovery.html)
 
-## Experiments
-
-![In Development](https://img.shields.io/badge/Pending%20Documentation-000000.svg?style=flat-square)
-
-Have a look at the **[Zyfra RF MLflow Experiment](https://github.com/users/UmbertoFasci/projects/9)** to keep track of MLflow implementation.
-
 ## Deployment
 
 ![In Development](https://img.shields.io/badge/Coming%20Soon-000000.svg?style=flat-square)
@@ -32,6 +26,10 @@ The primary objective is to create a model that can accurately predict the recov
 
 The project's success will be measured using the Symmetric Mean Absolute Percentage Error (sMAPE), providing a balanced assessment of our model's predictive capabilities.
 
+## Experiments
+Have a look at the **[Zyfra RF MLflow Experiment](https://github.com/users/UmbertoFasci/projects/9)** to keep track of MLflow implementation.
+
+![MLflow Dashboard](https://github.com/UmbertoFasci/Zyfra_Recovery_Optimization/blob/main/documentation_assets/MLflow_Experiment_Dashboard.png)
 
 ## Technological Process
 
