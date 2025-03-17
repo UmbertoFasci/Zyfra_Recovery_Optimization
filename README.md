@@ -9,10 +9,6 @@
 ## Original Portfolio Page
 [Zyfra - Gold Recovery Optimization](https://umbertofasci.github.io/Projects/OptimizingGoldRecovery.html)
 
-## Deployment
-
-![In Development](https://img.shields.io/badge/Coming%20Soon-000000.svg?style=flat-square)
-
 ## Introduction
 
 <img src="https://github.com/UmbertoFasci/Zyfra_Recovery_Optimization/blob/main/documentation_assets/zyfra.png" align="right"
